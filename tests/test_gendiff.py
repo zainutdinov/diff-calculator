@@ -2,8 +2,8 @@ from gendiff.diff import generate_diff
 
 
 def test_generate_diff():
-    file_path1 = 'tests/file1.json'
-    file_path2 = 'tests/file2.json'
+    file_path1 = 'tests/fixtures/file1.json'
+    file_path2 = 'tests/fixtures/file2.json'
 
     diff_result = '''{
   - follow: false
