@@ -10,7 +10,7 @@ def format_value(value):
 def generate_diff(file_path1, file_path2):
     data1 = read_file(file_path1)
     data2 = read_file(file_path2)
-    
+
     all_keys = sorted(set(data1.keys()) | set(data2.keys()))
     diff_lines = []
 
