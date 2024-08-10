@@ -37,7 +37,7 @@ def test_generate_diff_yaml():
     assert diff == diff_result
 
 
-def test_generate_diff_json_recursion():
+def test_generate_diff_json_stylish():
     file_path1 = 'tests/fixtures/file1_recursion.json'
     file_path2 = 'tests/fixtures/file2_recursion.json'
 
@@ -91,7 +91,7 @@ def test_generate_diff_json_recursion():
     assert diff == diff_result
 
 
-def test_generate_diff_yaml_recursion():
+def test_generate_diff_yaml_stylish():
     file_path1 = 'tests/fixtures/file1_recursion.yaml'
     file_path2 = 'tests/fixtures/file2_recursion.yaml'
 
@@ -141,5 +141,51 @@ def test_generate_diff_yaml_recursion():
 }'''
 
     diff = generate_diff(file_path1, file_path2)
+
+    assert diff == diff_result
+
+
+def test_generate_diff_json_stylish():
+    file_path1 = 'tests/fixtures/file1_recursion.json'
+    file_path2 = 'tests/fixtures/file2_recursion.json'
+
+    diff_result = (
+        "Property 'common.follow' was added with value: false\n"
+        "Property 'common.setting2' was removed\n"
+        "Property 'common.setting3' was updated. From true to null\n"
+        "Property 'common.setting4' was added with value: 'blah blah'\n"
+        "Property 'common.setting5' was added with value: [complex value]\n"
+        "Property 'common.setting6.doge.wow' was updated. From '' to 'so much'\n"
+        "Property 'common.setting6.ops' was added with value: 'vops'\n"
+        "Property 'group1.baz' was updated. From 'bas' to 'bars'\n"
+        "Property 'group1.nest' was updated. From [complex value] to 'str'\n"
+        "Property 'group2' was removed\n"
+        "Property 'group3' was added with value: [complex value]"
+    )
+
+    diff = generate_diff(file_path1, file_path2, format_name='plain')
+
+    assert diff == diff_result
+
+
+def test_generate_diff_yaml_plain():
+    file_path1 = 'tests/fixtures/file1_recursion.yaml'
+    file_path2 = 'tests/fixtures/file2_recursion.yaml'
+
+    diff_result = (
+        "Property 'common.follow' was added with value: false\n"
+        "Property 'common.setting2' was removed\n"
+        "Property 'common.setting3' was updated. From true to null\n"
+        "Property 'common.setting4' was added with value: 'blah blah'\n"
+        "Property 'common.setting5' was added with value: [complex value]\n"
+        "Property 'common.setting6.doge.wow' was updated. From '' to 'so much'\n"
+        "Property 'common.setting6.ops' was added with value: 'vops'\n"
+        "Property 'group1.baz' was updated. From 'bas' to 'bars'\n"
+        "Property 'group1.nest' was updated. From [complex value] to 'str'\n"
+        "Property 'group2' was removed\n"
+        "Property 'group3' was added with value: [complex value]"
+    )
+
+    diff = generate_diff(file_path1, file_path2, format_name='plain')
 
     assert diff == diff_result

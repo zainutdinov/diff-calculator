@@ -1,5 +1,6 @@
 from gendiff.parser import read_file
 from gendiff.formatters.stylish import format_stylish
+from gendiff.formatters.plain import format_plain
 
 
 def process_both_dicts(key, data1, data2):
@@ -56,8 +57,10 @@ def build_diff(data1, data2):
     return diff
 
 
-def generate_diff(file_path1, file_path2, formatter=format_stylish):
+def generate_diff(file_path1, file_path2, format_name='stylish'):
     data1 = read_file(file_path1)
     data2 = read_file(file_path2)
     diff = build_diff(data1, data2)
-    return formatter(diff)
+    if format_name == 'plain':
+        return format_plain(diff)
+    return format_stylish(diff)
