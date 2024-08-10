@@ -13,24 +13,49 @@ def format_value(value, depth):
     return str(value)
 
 
+def format_nested(key, item, depth):
+    nested_value = format_stylish(item['children'], depth + 1)
+    return f"{'    ' * (depth - 1)}    {key}: {nested_value}"
+
+
+def format_unchanged(key, item, depth):
+    return f"{'    ' * (depth - 1)}    {key}: {format_value(item['value'], depth)}"
+
+
+def format_added(key, item, depth):
+    return f"{'    ' * (depth - 1)}  + {key}: {format_value(item['value'], depth)}"
+
+
+def format_removed(key, item, depth):
+    return f"{'    ' * (depth - 1)}  - {key}: {format_value(item['value'], depth)}"
+
+
+def format_changed(key, item, depth):
+    old_value = format_value(item['old_value'], depth)
+    new_value = format_value(item['new_value'], depth)
+    return [
+        f"{'    ' * (depth - 1)}  - {key}: {old_value}",
+        f"{'    ' * (depth - 1)}  + {key}: {new_value}"
+    ]
+
+
 def format_stylish(diff, depth=1):
-    indent = '    ' * (depth - 1)
     lines = []
 
     for item in diff:
         key = item['key']
         status = item['status']
-        if status == "nested":
-            nested_value = format_stylish(item['children'], depth + 1)
-            lines.append(f"{indent}    {key}: {nested_value}")
-        elif status == "unchanged":
-            lines.append(f"{indent}    {key}: {format_value(item['value'], depth)}")
-        elif status == "added":
-            lines.append(f"{indent}  + {key}: {format_value(item['value'], depth)}")
-        elif status == "removed":
-            lines.append(f"{indent}  - {key}: {format_value(item['value'], depth)}")
-        elif status == "changed":
-            lines.append(f"{indent}  - {key}: {format_value(item['old_value'], depth)}")
-            lines.append(f"{indent}  + {key}: {format_value(item['new_value'], depth)}")
 
-    return "{\n" + "\n".join(lines) + f"\n{indent}}}"
+        match status:
+            case "nested":
+                lines.append(format_nested(key, item, depth))
+            case "unchanged":
+                lines.append(format_unchanged(key, item, depth))
+            case "added":
+                lines.append(format_added(key, item, depth))
+            case "removed":
+                lines.append(format_removed(key, item, depth))
+            case "changed":
+                lines.extend(format_changed(key, item, depth))
+
+    return "{\n" + "\n".join(lines) + f"\n{'    ' * (depth - 1)}}}"
