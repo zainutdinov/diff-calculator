@@ -54,7 +54,7 @@ def test_generate_diff_json_stylish():
         }
         setting6: {
             doge: {
-              - wow: 
+              - wow:
               + wow: so much
             }
             key: value
@@ -108,7 +108,7 @@ def test_generate_diff_yaml_stylish():
         }
         setting6: {
             doge: {
-              - wow: 
+              - wow:
               + wow: so much
             }
             key: value
@@ -145,7 +145,7 @@ def test_generate_diff_yaml_stylish():
     assert diff == diff_result
 
 
-def test_generate_diff_json_stylish():
+def test_generate_diff_json_plain():
     file_path1 = 'tests/fixtures/file1_recursion.json'
     file_path2 = 'tests/fixtures/file2_recursion.json'
 
@@ -189,6 +189,7 @@ def test_generate_diff_yaml_plain():
     diff = generate_diff(file_path1, file_path2, format_name='plain')
 
     assert diff == diff_result
+
 
 def test_generate_diff_json_json():
     file_path1 = 'tests/fixtures/file1_recursion.json'

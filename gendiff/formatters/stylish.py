@@ -1,5 +1,7 @@
 def format_value_stylish(value, depth):
     indent = '    ' * depth
+    if value == "":
+        return ""
     if isinstance(value, dict):
         lines = []
         for k, v in value.items():
@@ -23,20 +25,34 @@ def format_unchanged(key, item, depth):
 
 
 def format_added(key, item, depth):
-    return f"{'    ' * (depth - 1)}  + {key}: {format_value_stylish(item['value'], depth)}"
+    formatted_value = format_value_stylish(item['value'], depth)
+    if formatted_value == "":
+        return f"{'    ' * (depth - 1)}  + {key}:"
+    return f"{'    ' * (depth - 1)}  + {key}: {formatted_value}"
 
 
 def format_removed(key, item, depth):
-    return f"{'    ' * (depth - 1)}  - {key}: {format_value_stylish(item['value'], depth)}"
+    formatted_value = format_value_stylish(item['value'], depth)
+    if formatted_value == "":
+        return f"{'    ' * (depth - 1)}  - {key}:"
+    return f"{'    ' * (depth - 1)}  - {key}: {formatted_value}"
 
 
 def format_changed(key, item, depth):
     old_value = format_value_stylish(item['old_value'], depth)
     new_value = format_value_stylish(item['new_value'], depth)
-    return [
-        f"{'    ' * (depth - 1)}  - {key}: {old_value}",
-        f"{'    ' * (depth - 1)}  + {key}: {new_value}"
-    ]
+    lines = []
+    if old_value == "":
+        lines.append(f"{'    ' * (depth - 1)}  - {key}:")
+    else:
+        lines.append(f"{'    ' * (depth - 1)}  - {key}: {old_value}")
+
+    if new_value == "":
+        lines.append(f"{'    ' * (depth - 1)}  + {key}:")
+    else:
+        lines.append(f"{'    ' * (depth - 1)}  + {key}: {new_value}")
+
+    return lines
 
 
 def format_stylish(diff, depth=1):
