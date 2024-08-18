@@ -27,8 +27,8 @@
 
 ## Требования
 
-- python ^3.12
-- pyyaml ^6.0.2
+- Python ^3.12
+- Poetry ^1.8.3
 
 ## Инструкция по установке
 
@@ -62,6 +62,19 @@ cd python-project-50
 ```bash
 poetry build
 python3 -m pip install --user dist/*.whl
+```
+
+
+### Запуск тестов
+
+```bash
+make test
+```
+
+### Запуск проверки линтера
+
+```bash
+make lint
 ```
 
 

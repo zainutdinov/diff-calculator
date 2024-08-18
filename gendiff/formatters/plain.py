@@ -31,6 +31,8 @@ def build_plain(diff, path=''):
                 result.append(f"Property '{full_path}' was updated. From {old_value} to {new_value}")
             case "unchanged":
                 continue
+            case _:
+                raise ValueError(f"Unsupported status '{status}' in diff structure")
     return result
 
 

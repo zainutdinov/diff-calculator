@@ -57,5 +57,7 @@ def format_stylish(diff, depth=1):
                 lines.append(format_removed(key, item, depth))
             case "changed":
                 lines.extend(format_changed(key, item, depth))
+            case _:
+                raise ValueError(f"Unsupported status '{status}' in diff structure")
 
     return "{\n" + "\n".join(lines) + f"\n{'    ' * (depth - 1)}}}"
