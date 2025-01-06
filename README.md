@@ -1,10 +1,6 @@
 <div align="center">
-<h1>Вычислитель отличий</h1>
+<h1>Вычислитель отличий / Diff calculator</h1>
 </div>
-
-
-### Hexlet tests and linter status:
-[![Actions Status](https://github.com/zainutdinov/python-project-50/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/zainutdinov/python-project-50/actions)
 
 ### CodeClimate Badges
 [![Maintainability](https://api.codeclimate.com/v1/badges/0abd02f71d6a9cbb2ddb/maintainability)](https://codeclimate.com/github/zainutdinov/python-project-50/maintainability)
@@ -13,7 +9,7 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/0abd02f71d6a9cbb2ddb/test_coverage)](https://codeclimate.com/github/zainutdinov/python-project-50/test_coverage)
 
 ### Python CI Badge
-[![Python CI](https://github.com/zainutdinov/python-project-50/actions/workflows/pyci.yml/badge.svg)](https://github.com/zainutdinov/python-project-50/actions/workflows/pyci.yml)
+[![Python CI](https://github.com/zainutdinov/diff-calculator/actions/workflows/pyci.yml/badge.svg)](https://github.com/zainutdinov/diff-calculator/actions/workflows/pyci.yml)
 
 
 ## Описание проекта
@@ -56,7 +52,7 @@ git clone https://github.com/zainutdinov/python-project-50
 > Далее выполните установку пакета:
 
 ```bash
-cd python-project-50
+cd diff-calculator
 ```
 
 ```bash
